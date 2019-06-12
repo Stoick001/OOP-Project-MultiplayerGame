@@ -98,6 +98,12 @@ public class ServerThread extends Thread{
                     System.out.println(msg.getMessageString());
                     out.writeUTF(msg.getMessageString());
                     out.flush();
+
+                    if (msg.type.equals(Message.END)) {
+                        moves = new ConcurrentLinkedQueue();
+                        notPlayed = new ConcurrentLinkedQueue();
+                        oponent = "";
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

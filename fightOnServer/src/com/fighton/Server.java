@@ -86,6 +86,9 @@ public class Server implements Runnable {
             case Message.RECONNECT:
                 reconnect(id, msg);
                 break;
+            case Message.END:
+                sendMessage(msg.recipient, msg);
+                break;
         }
     }
 

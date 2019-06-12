@@ -12,6 +12,7 @@ public class Message implements Serializable {
     static final String UPDATE = "update"; // play#play....
     static final String DID = "did";
     static final String RECONNECT = "reconnect";
+    static final String END = "end";
 
     public String type;
     public String sender;

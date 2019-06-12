@@ -6,53 +6,78 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+import java.util.LinkedList;
 
 public class GameScreen implements Screen {
     final FightOn game;
 
-    private Texture walk;
-    private TextureRegion[] walkFrames;
-    private Animation animationWalkPlayer1, animationWalkPlayer2;
+    private Texture walk, fist, crouch;
+    private LinkedList<Animation> animationsPlayer1, animationsPlayer2;
     public float elapsedTime;
     public Player p1;
     public Player p2;
 
+    BitmapFont font;
+
     public GameScreen(final FightOn game)  {
         this.game = game;
 
+        animationsPlayer1 = new LinkedList<Animation>();
+        animationsPlayer2 = new LinkedList<Animation>();
+
+        // LOAD TEXTURES
         walk = new Texture(Gdx.files.internal("animation/walk.png"));
-        walkFrames = new TextureRegion[4];
 
-        TextureRegion[][] tmpFrames = TextureRegion.split(walk, 256, 256);
+        fist = new Texture(Gdx.files.internal("animation/fist.png"));
 
-        TextureRegion[] walkFramesInvert = new TextureRegion[4];
+        crouch = new Texture(Gdx.files.internal("animation/crouch.png"));
+
+
+        // SETUP ANIMATIONS
+        addAnimation(walk, animationsPlayer1, animationsPlayer2);
+        addAnimation(fist, animationsPlayer1, animationsPlayer2);
+        addAnimation(crouch, animationsPlayer1, animationsPlayer2);
+
+        if (game.player == 1) {
+            p1 = new Player(0, 0, animationsPlayer1, game);
+            p2 = new Player(500, 0, animationsPlayer2, game);
+        } else {
+            p2 = new Player(0, 0, animationsPlayer1, game);
+            p1 = new Player(500, 0, animationsPlayer2, game);
+        }
+
+        p1.oponent = p2;
+        p2.oponent = p1;
+
+        p1.nextFrame(Player.WALK, elapsedTime);
+        p2.nextFrame(Player.WALK, elapsedTime);
+
+        font = new BitmapFont();
+    }
+
+    private void addAnimation(Texture texture, LinkedList<Animation> animationsPlayer1, LinkedList<Animation> animationsPlayer2) {
+        TextureRegion[][] tmpFrames = TextureRegion.split(texture, 256, 256);
+
+        TextureRegion[] frames = new TextureRegion[4];
+        TextureRegion[] invertedFrames = new TextureRegion[4];
         TextureRegion tempTextReg;
 
         int ind = 0;
         for (int i = 0; i < tmpFrames.length; i++) {
             for (int j = 0; j < tmpFrames[0].length; j++) {
-                walkFrames[ind] = tmpFrames[i][j];
+                frames[ind] = tmpFrames[i][j];
                 tempTextReg = new TextureRegion(tmpFrames[i][j]);
                 tempTextReg.flip(true, false);
-                walkFramesInvert[ind] = tempTextReg;
+                invertedFrames[ind] = tempTextReg;
                 ind += 1;
             }
         }
 
-        animationWalkPlayer1 = new Animation(1f/4f, walkFramesInvert);
-        animationWalkPlayer2 = new Animation(1f/4f, walkFrames);
-
-        if (game.player == 1) {
-            p1 = new Player(0, 0, animationWalkPlayer1);
-            p2 = new Player(500, 0, animationWalkPlayer2);
-        } else {
-            p2 = new Player(0, 0, animationWalkPlayer1);
-            p1 = new Player(500, 0, animationWalkPlayer2);
-        }
-
-        p1.nextFrame(Player.WALK, elapsedTime);
-        p2.nextFrame(Player.WALK, elapsedTime);
+        animationsPlayer1.add(new Animation(1f/4f, invertedFrames));
+        animationsPlayer2.add(new Animation(1f/4f, frames));
     }
 
     @Override
@@ -63,9 +88,13 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0.2f, 0.5f, 1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        p1.drawHitbox();
+        p2.drawHitbox();
 
         game.batch.begin();
 
+        font.draw(game.batch, "HP " + p1.health, p1.positionX+100, 300);
+        font.draw(game.batch, "HP " + p2.health, p2.positionX+100, 300);
 
         handlePlayer1(msg);
 
@@ -81,16 +110,26 @@ public class GameScreen implements Screen {
     private void handlePlayer1(Message msg) {
         float time = Gdx.graphics.getDeltaTime();
 
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            p1.positionX -= 100 * time;
-            p1.nextFrame(Player.WALK, elapsedTime);
-            msg.contents = Input.Keys.LEFT + "/" + p1.positionX;
-        }
+        if (!p1.animationLock) {
+            if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                p1.moveX(p1.positionX -= 100 * time);
+                p1.nextFrame(Player.WALK, elapsedTime);
+                msg.contents = Input.Keys.LEFT + "/" + p1.positionX;
+            }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            p1.positionX += 100 * time;
-            p1.nextFrame(Player.WALK, elapsedTime);
-            msg.contents = Input.Keys.RIGHT + "/" + p1.positionX;
+            if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                p1.moveX(p1.positionX += 100 * time);
+                p1.nextFrame(Player.WALK, elapsedTime);
+                msg.contents = Input.Keys.RIGHT + "/" + p1.positionX;
+            }
+        } else {
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            p1.crouch(elapsedTime);
+            msg.contents = Input.Keys.DOWN + "/" + p1.positionX;
+        } else if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            p1.fist(elapsedTime);
+            msg.contents = Input.Keys.SPACE + "/" + p1.positionX;
         }
     }
 
@@ -102,13 +141,21 @@ public class GameScreen implements Screen {
 
         System.out.println(p2.positionX);
         if(Input.Keys.RIGHT == Integer.parseInt(move[0])) {
-            p2.positionX = Integer.parseInt(move[1]);
+            p2.moveX(Integer.parseInt(move[1]));
             p2.nextFrame(Player.WALK, elapsedTime);
         }
 
         if(Input.Keys.LEFT == Integer.parseInt(move[0])) {
-            p2.positionX = Integer.parseInt(move[1]);
+            p2.moveX(Integer.parseInt(move[1]));
             p2.nextFrame(Player.WALK, elapsedTime);
+        }
+
+        if (Input.Keys.DOWN == Integer.parseInt(move[0])) {
+            p2.moveX(Integer.parseInt(move[1]));
+            p2.crouch(elapsedTime);
+        } else if (Input.Keys.SPACE == Integer.parseInt(move[0])) {
+            p2.moveX(Integer.parseInt(move[1]));
+            p2.fist(elapsedTime);
         }
     }
 
