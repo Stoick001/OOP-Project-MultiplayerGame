@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6456352-93dc-48fb-a213-dd6b02fe19ec" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fighton/core/assets/animation/crouch.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fighton/core/assets/animation/fist.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/fightOnServer/com/fighton/GameThread.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/fightOnServer/com/fighton/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/fightOnServer/com/fighton/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fighton/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fighton/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fighton/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fighton/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fighton/ServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fighton/ServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fighton/core/src/com/fightongame/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fighton/core/src/com/fightongame/GameScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fighton/core/src/com/fightongame/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fighton/core/src/com/fightongame/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fighton/core/src/com/fightongame/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fighton/core/src/com/fightongame/Player.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,7 +19,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/fighton/ServerThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1001">
+            <state relative-caret-position="440">
               <caret line="105" column="21" selection-start-line="105" selection-start-column="21" selection-end-line="105" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -42,12 +31,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/fighton/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
+            <state relative-caret-position="1260">
               <caret line="90" selection-start-line="90" selection-end-line="90" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7486#7487#0" expanded="true" />
-                <element signature="e#7534#7535#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -142,7 +129,7 @@
   <component name="ProjectFrameBounds" extendedState="4">
     <option name="x" value="67" />
     <option name="y" value="30" />
-    <option name="width" value="917" />
+    <option name="width" value="897" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -151,7 +138,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -178,13 +164,14 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554625704759" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../fighton" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -307,10 +294,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="30" width="917" height="1050" extended-state="4" />
+    <frame x="67" y="30" width="897" height="1050" extended-state="4" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20321469" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2079906" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -399,32 +386,30 @@
     <entry file="file://$PROJECT_DIR$/src/com/fighton/GameThread.java" />
     <entry file="file://$PROJECT_DIR$/src/com/fighton/Player.java" />
     <entry file="file://$PROJECT_DIR$/src/com/fighton/GameState.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/fighton/Message.java">
+    <entry file="file://$PROJECT_DIR$/src/com/fighton/ServerThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+        <state relative-caret-position="440">
+          <caret line="105" column="21" selection-start-line="105" selection-start-column="21" selection-end-line="105" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/fighton/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
+        <state relative-caret-position="1260">
           <caret line="90" selection-start-line="90" selection-end-line="90" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7486#7487#0" expanded="true" />
-            <element signature="e#7534#7535#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/fighton/ServerThread.java">
+    <entry file="file://$PROJECT_DIR$/src/com/fighton/Message.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1001">
-          <caret line="105" column="21" selection-start-line="105" selection-start-column="21" selection-end-line="105" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="210">
+          <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
         </state>
       </provider>
     </entry>
